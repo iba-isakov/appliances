@@ -54,7 +54,7 @@
         </div>
         <div class="home__container_two">
             <div class="home__container_title">
-                <span class="container_title_left">Популярные товары</span>
+                <span class="container_title_left">Популярные товары123</span>
                 <a href="#" class="container_title_right">Посмотреть все товары</a>
             </div>
             <carousel class="slaider_three"
