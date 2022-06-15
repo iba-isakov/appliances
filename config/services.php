@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'moy_sklad' => [
+        'login' => env('MOYSKLAD_LOGIN'),
+        'password' => env('MOYSKLAD_PASSWORD'),
+    ]
+
 ];

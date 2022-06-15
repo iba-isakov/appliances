@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::post('v1/getProducts',[\App\Http\Controllers\Api\MoySkladController::class,'getProducts']);
 Route::post('v1/getGroups',[\App\Http\Controllers\Api\MoySkladController::class,'getGroups']);
 Route::post('v1/getImagesForProducts',[\App\Http\Controllers\Api\MoySkladController::class,'getImagesForProducts']);
+Route::post('v1/getProductRemains',[\App\Http\Controllers\Api\MoySkladController::class,'getProductRemains']);

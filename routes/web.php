@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'index'])->name('product');
 Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'category'])->name('category');
 Route::prefix('api/v1')->as('api');

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\Relations\ProductRelations;
 class Product extends Model
 {
     use HasFactory;
+    use ProductRelations;
     protected $table = "products";
     protected $fillable = [
         'name',

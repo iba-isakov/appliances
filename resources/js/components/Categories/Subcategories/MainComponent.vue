@@ -1,15 +1,16 @@
 <template>
     <div class="container" id="b1">
         <ul class="breadcrumb">
-            <li><a href="/">Главная</a></li>
-            <li><a href="#">Бытовая техника</a></li>
-            <li><a href="/pages/categories/index.php/index.php">Водонагреватели</a></li>
-            <li><a href="/pages/categories/index.php/index.php">Midea</a></li>
-            <li>Водонагреватель Midea MWH-8015-CVM</li>
+            <ul class="breadcrumb">
+                <li><a href="/">Главная</a></li>
+                <li v-for="breadCrumb in breadCrumbs"><a :href="`/category/${breadCrumb.id}`">{{ breadCrumb.name }}</a>
+                </li>
+                <li><a :href="`/category/${category.id}`">{{ category.name }}</a></li>
+            </ul>
         </ul>
         <div class="container__title">
-            <h1 class="container__title_h1">Водонагреватели Midea</h1>
-            <span class="container__title_value">36 товаров</span>
+            <h1 class="container__title_h1">{{ category.name }}</h1>
+            <span class="container__title_value">{{ category.product_count }} товаров</span>
         </div>
         <div class="sort__box">
             <div class="sort__box_boxElement">
@@ -22,8 +23,8 @@
                 </div>
             </div>
             <div ckass="sort__box_buttonBox">
-                <button class="sort__box_buttonBox_line"></button>
-                <button class="sort__box_buttonBox_square"></button>
+                <button class="sort__box_buttonBox_line" v-on:click="isList = true" :class="{'sort__box_active': isList}"></button>
+                <button class="sort__box_buttonBox_square" v-on:click="isList = false" :class="{'sort__box_active': !isList}"></button>
             </div>
         </div>
         <div class="container__top">
@@ -188,196 +189,21 @@
                     <img src="/css/img/Group 6601.png" alt="">
                 </div>
                 <div class="home__container_two">
-                    <div class="slaider_three">
-                        <!-- <a href="#" class="slaider__three_box">
-                            <img src="/css/img/sl-three1.png" alt="">
-                            <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                            <div class="slaider__three_box_reviews">
-                                <ul class="reviews_star_list">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                            </div>
-                            <div class="slaider_three_price">
-                                <div class="price_box_value">
-                                    <span class="price_old">34 790 ₽</span>
-                                    <span class="price_new">24 800 ₽</span>
-                                </div>
-                                <button class="add__butt"></button>
-                            </div>
-                            <div class="buttons_hover_box">
-                                <button class="butt_hv _one"></button>
-                                <button class="butt_hv _two"></button>
-                            </div>
-                        </a> -->
-                        <a href="#" class="slaider__three_box">
-                            <img src="/css/img/sl-three1.png" alt="">
-                            <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                            <div class="slaider__three_box_reviews">
-                                <ul class="reviews_star_list">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                            </div>
-                            <div class="slaider_three_price">
-                                <div class="price_box_value">
-                                    <span class="price_old">34 790 ₽</span>
-                                    <span class="price_new">24 800 ₽</span>
-                                </div>
-                                <button class="add__butt"></button>
-                            </div>
-                            <div class="buttons_hover_box">
-                                <button class="butt_hv _one"></button>
-                                <button class="butt_hv _two"></button>
-                            </div>
-                        </a>
-                        <a href="#" class="slaider__three_box">
-                            <img src="/css/img/sl-three1.png" alt="">
-                            <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                            <div class="slaider__three_box_reviews">
-                                <ul class="reviews_star_list">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                            </div>
-                            <div class="slaider_three_price">
-                                <div class="price_box_value">
-                                    <span class="price_old">34 790 ₽</span>
-                                    <span class="price_new">24 800 ₽</span>
-                                </div>
-                                <button class="add__butt"></button>
-                            </div>
-                            <div class="buttons_hover_box">
-                                <button class="butt_hv _one"></button>
-                                <button class="butt_hv _two"></button>
-                            </div>
-                        </a>
-                        <a href="#" class="slaider__three_box">
-                            <img src="/css/img/sl-three1.png" alt="">
-                            <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                            <div class="slaider__three_box_reviews">
-                                <ul class="reviews_star_list">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                            </div>
-                            <div class="slaider_three_price">
-                                <div class="price_box_value">
-                                    <span class="price_old">34 790 ₽</span>
-                                    <span class="price_new">24 800 ₽</span>
-                                </div>
-                                <button class="add__butt"></button>
-                            </div>
-                            <div class="buttons_hover_box">
-                                <button class="butt_hv _one"></button>
-                                <button class="butt_hv _two"></button>
-                            </div>
-                        </a>
-                        <a href="#" class="slaider__three_box">
-                            <img src="/css/img/sl-three1.png" alt="">
-                            <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                            <div class="slaider__three_box_reviews">
-                                <ul class="reviews_star_list">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                                <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                            </div>
-                            <div class="slaider_three_price">
-                                <div class="price_box_value">
-                                    <span class="price_old">34 790 ₽</span>
-                                    <span class="price_new">24 800 ₽</span>
-                                </div>
-                                <button class="add__butt"></button>
-                            </div>
-                            <div class="buttons_hover_box">
-                                <button class="butt_hv _one"></button>
-                                <button class="butt_hv _two"></button>
-                            </div>
-                        </a>
+                    <div v-if="!isList" class="slaider_three slider">
+                        <div v-for="product in category.products">
+                            <product-card-component
+                                :product="product"></product-card-component>
+                        </div>
                     </div>
-                    <div class="subcategories__item_modifiedBox">
+                    <div v-else class="subcategories__item_modifiedBox">
+                        <div v-for="product in category.products">
                         <div class="subcategories__item_modifiedBox_element">
-                            <a href="#" class="subcategories__item_modifiedBox_item">
-                                <img src="/css/img/modified_img.png" alt="">
-                                <div class="subcategories__item_modifiedBox_item_infoCenter">
-                                <span class="subcategories__item_modifiedBox_item_infoCenter_title">Водонагреватель Midea MWH-8015-CVM, установка вертикальная,
-                                                                                                    80 л, нержавеющая сталь, 2 кВт, 49.8 см x 95.5 см x 27.2 см
-                                </span>
-                                    <span class="value__product">В наличии:<span class="value__product_number">156шт</span></span>
-                                    <span class="value__productCode">Код товара:<span class="value__productCodeNumber">153644567</span></span>
-                                    <div class="subcategories__item_modifiedBox_item_iconInfo">
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                        <div class="subcategories__item_modifiedBox_item_iconInfo_icon">
-                                            <img src="/css/img/iconInfo_img.svg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="element__bottom">
-                                        <div class="element__bottom_compareBox">
-                                            <label class="radio">
-                                                <input class="element__bottom_compareBox_checkbox" type="checkbox"  name="checkbox">
-                                                <div class="element__bottom_compareBox_checkbox_check"></div>
-                                            </label>
-                                            <button class="element__bottom_compareBox_button">Сравнить</button>
-                                        </div>
-                                        <div class="element__bottom_stars">
-                                            <ul class="reviews_star_list">
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                            </ul>
-                                            <span class="element__bottom_stars_text">2</span>
-                                        </div>
-                                        <div class="element__bottom_buttonReviews"></div>
-                                    </div>
-                                </div>
-                                <div class="subcategories__item_modifiedBox_item_infoRight">
-                                    <div class="price_box_value">
-                                        <span class="price_old">34 790 ₽</span>
-                                        <span class="price_new">24 800 ₽</span>
-                                    </div>
-                                    <a href="#" class="subcategories__item_modifiedBox_item_infoRight_text">Рассрочка 12 месяцев</a>
-                                    <div class="subcategories__item_modifiedBox_item_infoRight_buttons">
-                                        <div class="button__favorites"></div>
-                                        <div class="button__notify">Уведомить</div>
-                                    </div>
-                                </div>
-                            </a>
+
+                                <product-card-component
+                                    :product="product"
+                                    :is-block="false"
+                                    ></product-card-component>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -393,324 +219,13 @@
             </span>
             </div>
         </div>
-        <div class="home__container_two">
-            <div class="home__container_title">
-                <span class="container_title_left">Вместе с этим товаром, чаще всего покупают</span>
-            </div>
-            <div class="slaider_three">
-                <div class="prev"></div>
-                <div class="next"></div>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="home__container_two">
-            <div class="home__container_title">
-                <span class="container_title_left">Ранее просмотренные товары</span>
-            </div>
-            <div class="slaider_three">
-                <div class="prev"></div>
-                <div class="next"></div>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-                <a href="#" class="slaider__three_box">
-                    <img src="/css/img/sl-three1.png" alt="">
-                    <span class="slaider__three_box_text">Духовой шкаф Midea MO78100CX</span>
-                    <div class="slaider__three_box_reviews">
-                        <ul class="reviews_star_list">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <span class="slaider__three_box_reviews_text">Отзывы (2)</span>
-                    </div>
-                    <div class="slaider_three_price">
-                        <div class="price_box_value">
-                            <span class="price_old">34 790 ₽</span>
-                            <span class="price_new">24 800 ₽</span>
-                        </div>
-                        <button class="add__butt"></button>
-                    </div>
-                    <div class="buttons_hover_box">
-                        <button class="butt_hv _one"></button>
-                        <button class="butt_hv _two"></button>
-                    </div>
-                </a>
-            </div>
-        </div>
+
+        <viewed-products
+            :viewed-products="viewedProducts">
+        </viewed-products>
+        <also-buy-products
+            :also-buy-products="category.products"
+            ></also-buy-products>
         <div class="home__container_nine home__container_thirteen">
             <div class="icon__info_box">
                 <div class="icon__info_box_item">
@@ -737,33 +252,53 @@
 </template>
 
 <script>
+import { Carousel, Slide } from "vue-carousel";
+import viewedProducts from "../../Products/ViewedProducts";
+import productCardComponent  from "../../Products/ProductCardComponent";
+import alsoBuyProducts from "../../Products/AlsoBuyProducts";
 export default {
     name: "MainComponent",
-    props:{
-      category : Object,
+    props: {
+        category: Object,
         parentCategories: Array,
     },
-    mounted() {
-        let recaptchaScript = document.createElement('script')
-        recaptchaScript.setAttribute('src', 'js/scripts.js')
-        document.head.appendChild(recaptchaScript)
-        console.log(this.category)
+    data(){
+      return {
+          isList: true,
+          viewedProducts: Array,
+      }
     },
-    computed:{
-        breadCrumbs(){
-          let breadCrumbs = []
-            this.parentCategories.forEach(function (category){
+    computed: {
+        breadCrumbs() {
+            let breadCrumbs = []
+            this.parentCategories.forEach(function (category) {
                 breadCrumbs.push({
                     name: category.name,
                     id: category.id,
                 })
             })
             return breadCrumbs.reverse()
+        },
+        mostBuy(){
+            return this.category.products
         }
+    },
+    mounted() {
+      this.viewedProducts = JSON.parse(localStorage.getItem('viewedProducts'))
+    },
+    components: {
+        Carousel,
+        Slide,
+        viewedProducts,
+        productCardComponent,
+        alsoBuyProducts
     },
 }
 </script>
-
 <style scoped>
-
+.slider{
+    flex-wrap: wrap;
+    column-gap: 43px;
+    justify-content: normal;
+}
 </style>

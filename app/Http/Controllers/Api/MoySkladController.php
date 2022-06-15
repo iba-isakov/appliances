@@ -5,35 +5,25 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Remains;
+use App\Models\Review;
+use App\Services\External\MoySkladApiService;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class MoySkladController extends Controller
 {
+    /** @var MoySkladApiService */
+    protected $moySkladApiService;
+
+    public function __construct(MoySkladApiService $moySkladApiService)
+    {
+        $this->moySkladApiService = $moySkladApiService;
+    }
+
     public function getProducts()
     {
-        $client = new Client();
-        $login = 'it@tmn6';
-        $password = 'qweasdzxc123';
-        $options = base64_encode($login . ':' . $password);
-        $headers = [
-            'Authorization' => "Basic " . $options,
-        ];
-        $token_request = $client->request(
-            'post',
-            'https://online.moysklad.ru/api/remap/1.2/security/token',
-            [
-                'headers' => $headers,
-            ]
-        );
-        $token = json_decode($token_request->getBody()->getContents())->access_token;
-        $headers_with_token = [
-            'Authorization' => "Bearer " . $token,
-        ];
-        $products_request = $client->request('get', 'https://online.moysklad.ru/api/remap/1.2/entity/product', [
-            'headers' => $headers_with_token
-        ]);
-        $rows = json_decode($products_request->getBody()->getContents())->rows;
+        $rows = $this->moySkladApiService->getProducts();
         $count = 0;
         foreach ($rows as $row) {
             $attributes = [];
@@ -43,7 +33,6 @@ class MoySkladController extends Controller
                 }
             }
 
-//            Встраиваемая техника/Духовые шкафы/Электрические шкафы/Korting
             if($row->pathName) {
                 $categories = explode('/',$row->pathName);
                 $parent_id = 0;
@@ -60,11 +49,11 @@ class MoySkladController extends Controller
                        $parent_id = $parent_category->id;
                 }
                 Product::updateOrCreate([
-                    'productId' => $row->id,
+                    'productId' => $row->externalCode,
 
                 ], [
                     'category_id' => $parent_id,
-                    'buy_price' => floatval($row->buyPrice->value) ?? 0,
+                    'buy_price' => floatval(($row->buyPrice->value) ?? 0)/100,
                     'wholesale_price' => (floatval($row->salePrices[1]->value) ?? 0)/100,
                     'retail_price' => (floatval($row->salePrices[0]->value) ?? 0)/100,
                     'country_of_manufacture' => $attributes['Страна производства'] ?? null,
@@ -80,37 +69,6 @@ class MoySkladController extends Controller
             }
         }
     }
-
-    public function getGroups()
-    {
-        $client = new Client();
-        $login = 'it@tmn6';
-        $password = 'qweasdzxc123';
-        $options = base64_encode($login . ':' . $password);
-        $headers = [
-            'Authorization' => "Basic " . $options,
-        ];
-        $token_request = $client->request(
-            'post',
-            'https://online.moysklad.ru/api/remap/1.2/security/token',
-            [
-                'headers' => $headers,
-            ]
-        );
-        $token = json_decode($token_request->getBody()->getContents())->access_token;
-        $headers_with_token = [
-            'Authorization' => "Bearer " . $token,
-        ];
-        $products_request = $client->request(
-            'get',
-            'https://online.moysklad.ru/api/remap/1.2/entity/productfolder',
-            [
-                'headers' => $headers_with_token
-            ]
-        );
-        $groups = json_decode($products_request->getBody()->getContents())->rows;
-    }
-
     public function getImagesForProducts()
     {
         $client = new Client();
@@ -139,6 +97,28 @@ class MoySkladController extends Controller
             $images = json_decode($products_images_request->getBody()->getContents())->rows;
             if ($images) {
                 dd($images);
+            }
+        }
+    }
+    public function getProductRemains()
+    {
+        $rows = $this->moySkladApiService->getProductRemains();
+        foreach ($rows as $row)
+        {
+            $product = Product::query()
+                ->where('productId',$row->externalCode)
+                ->first();
+            if($product) {
+                Remains::updateOrCreate(
+                    [
+                        'product_id' => $product->id
+                    ],
+                    [
+                        'product_id' => $product->id,
+                        'in_stock' => $row->stock,
+                        'expected' => $row->inTransit,
+                    ]
+                );
             }
         }
     }

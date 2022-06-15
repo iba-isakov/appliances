@@ -26,9 +26,9 @@ $(document).ready(function($) {
 
 // open catalog button
 
-$('#button__open_catalog, .catalog__close_butt, .catalog').on('click',function () {
-  $('.menu__mobile_catalog_open').toggleClass('flex none');
-});
+// $('#button__open_catalog, .catalog__close_butt, .catalog').on('click',function () {
+//   $('.menu__mobile_catalog_open').toggleClass('flex none');
+// });
 
 // open filter button
 

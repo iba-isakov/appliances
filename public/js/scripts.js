@@ -25,10 +25,10 @@ $(document).ready(function ($) {
     }
   });
 }); // open catalog button
-
-$('#button__open_catalog, .catalog__close_butt, .catalog').on('click', function () {
-  $('.menu__mobile_catalog_open').toggleClass('flex none');
-}); // open filter button
+// $('#button__open_catalog, .catalog__close_butt, .catalog').on('click',function () {
+//   $('.menu__mobile_catalog_open').toggleClass('flex none');
+// });
+// open filter button
 
 $('.filter__box_close, .open__filter__box').on('click', function () {
   $('.container__top_left').toggleClass('flex');
